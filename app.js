@@ -6,10 +6,10 @@ const app = express();
 // Middleware
 app.use(express.json()); // Parse JSON bodies
 app.use(
-    express.urlencoded({
-      extended: true,
-    })
-  ); // Parse URL-encoded bodies
+  express.urlencoded({
+    extended: true,
+  })
+); // Parse URL-encoded bodies
 
 app.use("/api", pricesRouter); // Use the prices routes
 
