@@ -6,8 +6,8 @@ const { default: axios } = require('axios');
 
 async function getMultiple(items) {
   const connection = await mysql.createConnection(config.db);
-  const sql = 'SELECT code, barcode, price, no_discount as discount, exp_date as shelf_life FROM prices_farmat WHERE CODE IN (?)';
-  const [rows] = await connection.query(sql, items);
+  const sql = 'SELECT code, barcode, MIN(price) as price, no_discount as discount, MAX(exp_date) as shelf_life FROM prices_farmat WHERE CODE IN (?) GROUP BY code, barcode, no_discount';
+  const [rows] = await connection.query(sql, [items]);
     
   return rows;
 }
